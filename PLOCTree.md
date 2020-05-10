@@ -1,4 +1,6 @@
 # PLOCTree
-## A Fast, High-Quality Hardware BVH Builder
+A Fast, High-Quality Hardware BVH Builder
 
 ---
+
+### Background
