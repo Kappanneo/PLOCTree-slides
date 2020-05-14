@@ -12,7 +12,7 @@ Let's start with some basic concept
 
 ### Bounding Volume Hierarchy (BVH)
 <!--
-In case you don't know already BVHs are kind of needed for raytracing...
+In case you  ̶d̶o̶n̶'̶t̶ ̶k̶n̶o̶w̶ ̶a̶l̶r̶e̶a̶d̶y̶ are stupid, BVHs are kind of needed for raytracing...
 ... and this is relevant
 ... because raytracing is f***ing cool
 -->
@@ -56,37 +56,13 @@ So you use volumes like Axis Alligned Boxes to bind geometry primitives
 
 ![](https://i.imgur.com/1FUULyG.png =700x)
 
-
-<!-- example of insertion -->
+<!-- example of insertion, TODO: understand better how insertion-based solutions work, name some of such techiniques -->
 
 ---
 
 ### Surface Area Heuristic (SAH)
 
----
-
-
-
----
-
-### Parallel Locality Ordered Clustering (PLOC)
-
----
-
-PLOC is a massively **parallel**, **agglomerative** **BVH construction algorithm**
-
-It orders clusters in **Morton order** to allow for efficient neighboring distance computation
-
----
-
-#### The PLOC algorithm steps:
-1.
-2.
-3.
-
-<!--
-bla bla
--->
+<!-- is this really needed here? -->
 
 ---
 
@@ -102,23 +78,90 @@ morton order maps two dimentions into a single dimention (array) while preservin
 
 ---
 
+### Parallel Locality Ordered Clustering (PLOC)
+
+---
+
+PLOC is a massively **parallel**, **agglomerative** **BVH construction algorithm**
+
+It orders clusters in **Morton order** to allow for efficient neighboring distance computation
+
+---
+
+#### The PLOC algorithm steps
+
+---
+
+1. Assign each AABB a morton code
+2. Input AABB:s sorted in morton code order
+3. Apply repeated iterations over array - PLOC sweeps
+
+---
+
+![](https://i.imgur.com/HZ4vajy.png =600x)
+<!-- Illustration of the nearest neighbor search for r ¼ 2. Two clusters (red triangles) search for their nearest neighbors (blue triangles) in the neighborhood (red curve). Notice how the algorithm adapts to the den- sity of clusters in the neighborhood. -->
+
+
+---
+
+#### PLOC sweeps
+
+<!--
+1. NN-search - for every AABB - compute a distance to all AABB:s in window radius R. Select AABB with lowest distance as NN
+2. Merging: Find pairs of AABB that are mutual nearest neighbors -merge each such pair into a BVH inner node. Place AABB of newly created node in one of the original array positions, and leave the other empty.
+	AABB:s that do not have mutual NN:s are left unchanged.
+3. Remove empty elements in the array
+-->
+
+---
+
+
+![](https://i.imgur.com/TSEUX7o.png)
+
+![](https://i.imgur.com/8rgJUZP.png)
+
+---
+
+![](https://i.imgur.com/hhuzRBo.png)
+
+![](https://i.imgur.com/8rgJUZP.png)
+
+---
+
+![](https://i.imgur.com/GE9nVsl.png)
+
+![](https://i.imgur.com/8rgJUZP.png)
+
+---
+
+![](https://i.imgur.com/YV5IpFE.png)
+
+![](https://i.imgur.com/8rgJUZP.png)
+
+
+---
+
 ## PLOCTree
 
 ---
 
-![](https://i.imgur.com/qlafjcL.png)
+![](https://i.imgur.com/XmzWalB.png)
 
 <!-- How solution works (original contributions) -->
 
 ---
 
 ### Streaming algorithm
+
+<!-- maybe move in backgound? -->
+
 [wikipedia](https://en.wikipedia.org/wiki/Streaming_algorithm#Data_stream_model)
 
 <!-- 
 Lots of kernel launches - memory intensive - streaming behavoir
 Manipulating data
 -->
+
 
 ---
 
@@ -186,14 +229,17 @@ Manipulating data
 
 ---
 
-* PLOCTree consumes 1.4–1.9W 
 <!-- 1-3W mobile gpu, nothing left for rendering -->
 <!-- Run at full power on desktop -->
+  
+* PLOCTree consumes 1.4–1.9W 
 * 7% slower than LBVH
 * More power/energy consumtion than MergeTree
 * 5 x faster with 3 x less bandwith usage, 5 x less silicon than "binned SAH builder"
 <!-- -->
 * 4 x faster and 8 x less bandwidth than GPU PLOC
+
+---
 
 ![](https://i.imgur.com/3ozffhT.png)
 
