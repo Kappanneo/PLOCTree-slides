@@ -143,10 +143,6 @@ It orders clusters in **Morton order** to allow for efficient neighboring distan
 
 ## PLOCTree
 
----
-
-![](https://i.imgur.com/XmzWalB.png)
-
 <!-- How solution works (original contributions) -->
 
 ---
@@ -203,15 +199,17 @@ Manipulating data
 
 #### Hardware implementation
 
-![](https://i.imgur.com/qlafjcL.png)
+---
 
-----
+![](https://i.imgur.com/XmzWalB.png)
+
+---
 
 #### System architechture
 
 ![](https://i.imgur.com/xC0FU7w.png)
 
-----
+---
 
 #### Evaluation
 
@@ -261,10 +259,10 @@ Manipulating data
 <!-- Too inprecise for large scenes -->
 <!-- increasing radius would require alot of duplication on the hardware -->
 
-____
+___
 
 ![](https://i.imgur.com/AVXgN9x.png)
-____
+___
 
 * Limited number of pipelines, small evaluation scope
 
